@@ -20,7 +20,7 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         String uri = request.getRequestURI();
-
+        /*
         logger.info("UserAgent: {}", request.getHeader(USER_AGENT));
         logger.info("用户访问地址: {}, 来路地址: {}", uri, getIpAddrByRequest(request));
 
@@ -28,7 +28,7 @@ public class BaseInterceptor implements HandlerInterceptor {
         logger.debug("debug");
         logger.error("error");
         logger.trace("trace");
-        logger.warn("warn");
+        logger.warn("warn");*/
         return true;
     }
     public static String getIpAddrByRequest(HttpServletRequest request) {
