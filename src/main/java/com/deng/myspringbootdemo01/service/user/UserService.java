@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface UserService {
     List<UserDomain> getAllUser();
-    //String getUserByName(String name);
+    UserDomain getUserByName(String name);
 }

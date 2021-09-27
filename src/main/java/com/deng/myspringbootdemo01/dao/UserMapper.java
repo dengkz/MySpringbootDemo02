@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     List<UserDomain> getAllUser();
-    //String getUserByName(String name);
+    UserDomain getUserByName(String name);
 }

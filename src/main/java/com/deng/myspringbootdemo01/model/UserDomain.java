@@ -14,13 +14,15 @@ public class UserDomain {
     private Integer id;
     private  String name;
     private  String pwd;
+    private  String perm;
 
     @Override
     public String toString() {
-        return "{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", pwd='" + pwd + '\'' +
+                ", perm='" + perm + '\'' +
                 '}';
     }
 }

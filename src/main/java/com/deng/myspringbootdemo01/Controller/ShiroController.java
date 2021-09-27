@@ -22,7 +22,7 @@ public class ShiroController {
 
     @RequestMapping("/tologin")
     public String tologin(){
-        return "/error/login";
+        return "/login";
     }
 
     @RequestMapping("/login")
@@ -36,7 +36,7 @@ public class ShiroController {
             return "index";
         }catch (UnknownAccountException ex){
             model.addAttribute("msg","用户名或密码不正确");
-            return "/error/login";
+            return "/login";
         }
     }
 

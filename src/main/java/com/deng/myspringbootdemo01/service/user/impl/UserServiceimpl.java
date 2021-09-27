@@ -21,9 +21,11 @@ public class UserServiceimpl  implements UserService {
         return list;
     }
 
-    /*
+
     @Override
-    public String getUserByName(String name) {
-        return null;
-    }*/
+    public UserDomain getUserByName(String name) {
+
+        UserDomain userDomain = userMapper.getUserByName(name);
+        return userDomain;
+    }
 }

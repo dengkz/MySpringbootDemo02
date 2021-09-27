@@ -35,7 +35,10 @@ public class ShiroConfig {
         shiroFilter.put("/unauth","anon");
         shiroFilter.put("/login","anon");
         shiroFilter.put("/tologin","anon");
+
+        shiroFilter.put("/jdbc","perms[user:add]");
         shiroFilter.put("/*","authc");
+
         bean.setFilterChainDefinitionMap(shiroFilter);
 
         bean.setLoginUrl("/tologin");

@@ -4,4 +4,8 @@
     <select id="getAllUser" resultType="com.deng.myspringbootdemo01.model.UserDomain">
         select * from user
     </select>
+
+    <select id="getUserByName" parameterType="String" resultType="com.deng.myspringbootdemo01.model.UserDomain">
+        select * from user where name=#{name}
+    </select>
 </mapper>
