@@ -7,12 +7,17 @@ import org.apache.catalina.security.SecurityUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class UserRealm extends AuthorizingRealm {
 
@@ -33,8 +38,9 @@ public class UserRealm extends AuthorizingRealm {
         Subject subject = SecurityUtils.getSubject();
         UserDomain userDomain = (UserDomain)subject.getPrincipal();
 
-
         simpleAuthorizationInfo.addStringPermission(userDomain.getPerm());
+
+        System.out.println("userDomain getPerm:"+userDomain.getPerm());
 
         return simpleAuthorizationInfo;
     }
@@ -46,15 +52,23 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("执行了认证");
 
         UsernamePasswordToken userToken = (UsernamePasswordToken)token;
-        //连接数据库
-        UserDomain user = userService.getUserByName(userToken.getUsername());
-        if(user==null){
+        String password = new String(userToken.getPassword());
+        String username = userToken.getUsername();
+        //连接数据库  根据名字查询用户
+        UserDomain user = userService.getUserByName(username);
+        if(user==null || !password.equals(user.getPwd())){
             return  null;
         }
+        else
+        {
+            //构造安全数据并且返回
+            /*
+            ProfileResult result = null;
+            Map map = new HashMap();
+            List<Permission> permissionsByName = permissionService.findAll(map);
+            result = new ProfileResult(user,permissionsByName);*/
 
-
-
-
-        return new SimpleAuthenticationInfo(user,user.getPwd(),"");
+            return new SimpleAuthenticationInfo(user,user.getPwd(), this.getName());//这里的东西将会被存储到SessionId里
+        }
     }
 }

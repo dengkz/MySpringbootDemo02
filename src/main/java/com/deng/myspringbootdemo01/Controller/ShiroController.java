@@ -20,25 +20,7 @@ public class ShiroController {
     }
 
 
-    @RequestMapping("/tologin")
-    public String tologin(){
-        return "/login";
-    }
 
-    @RequestMapping("/login")
-    public String login(String username, String password, Model model){
-
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken userToken = new UsernamePasswordToken(username,password);
-
-        try{
-            subject.login(userToken);
-            return "index";
-        }catch (UnknownAccountException ex){
-            model.addAttribute("msg","用户名或密码不正确");
-            return "/login";
-        }
-    }
 
     @ResponseBody
     @RequestMapping("/unauth")
